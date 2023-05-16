@@ -1,6 +1,10 @@
-# This code will help to create customer in klaviyo. 
+# This code will help to create customer in klaviyo.
 
-#a) You can use below code to get email data form GA4 object.
+You need to install guzzlehttp on you PHP server.
+
+**composer require guzzlehttp/guzzle**
+
+#a) You can use below code to get email data form GA4 object. You can use this code in theme/footer liquid files. I have mentioned that code in footer.liquid file. 
 
   var email = dataLayer[0]['customer_email'];
 
