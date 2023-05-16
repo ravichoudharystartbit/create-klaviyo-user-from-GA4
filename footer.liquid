@@ -1,0 +1,26 @@
+<!-- call script to get email from GA4-->
+<script>
+var baseurl = "PHP-Server_URL";
+$( document ).ready(function() {
+    var emailGet = dataLayer[0]['customer_email']; 
+    if(emailGet == ''){
+           console.log('Email Not Valid'); 
+    }else if(isValidEmailAddress(emailGet)){
+            var fulURL = 'php-server-url'?emailGet='+emailGet;
+            $("#id").load(fulURL, function(responseTxt, statusTxt, xhr){
+                if(statusTxt == "success"){
+                 dataLayer.push({event:"klaviyo_id", klav_id :responseTxt}) 
+                }
+                if(statusTxt == "error"){
+                  console.log("Error: " + xhr.status + ": " + xhr.statusText);}
+                });
+    }else {
+            console.log('Email Not Valid');
+    }
+});
+//check email 
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    return pattern.test(emailAddress);
+}  
+</script>
